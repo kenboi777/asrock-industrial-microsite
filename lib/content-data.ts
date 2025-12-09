@@ -218,7 +218,7 @@ export const solutionTabs: SolutionTab[] = [
         label: 'AiSMA',
         url: '#',
         description: 'AiSMA Redfish-based secure management architecture for remote monitoring and control of distributed systems.',
-        image: '/aisma_redfish.jpg.jpg'
+        image: '/aisma_redfish.jpg'
       },
       {
         label: 'AiSafeguard',
