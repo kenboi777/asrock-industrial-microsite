@@ -278,7 +278,7 @@ export function LifecycleSection() {
                       </div>
                       <div className="flex flex-col rounded-2xl shadow-xl overflow-hidden h-full bg-white border border-slate-100 group hover:shadow-2xl transition-all duration-300">
                         <div className="overflow-hidden h-56 sm:h-64 relative">
-                           <Image src="/aisma.jpg" alt="AiSMA" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                           <Image src="/aisma_redfish.jpg" alt="AiSMA" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                         </div>
                         <div className="p-6 bg-slate-50 flex-1">
                           <p className="text-base md:text-sm text-slate-700 leading-relaxed text-justify" style={{ textAlignLast: 'left' as any }}>
