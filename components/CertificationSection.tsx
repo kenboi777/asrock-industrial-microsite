@@ -67,14 +67,8 @@ export function CertificationSection() {
   ];
 
   return (
-    // Section 容器背景保持淺灰
     <section className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
       
-      {/* 修改重點：高級藍色視差背景層 
-          - 將顏色從灰色 (#94a3b8) 改為深邃寶石藍 (#1e3a8a)。
-          - 確保無紫色調。
-          - 保持 backgroundAttachment: 'fixed' 以實現滑動互動效果。
-      */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
           className="absolute inset-0 opacity-30"
@@ -87,17 +81,17 @@ export function CertificationSection() {
 
       <div className="section-container relative z-10">
         <FadeIn>
-          <div className="text-center mb-12 lg:mb-16">
+          <div className="max-w-4xl mx-auto mb-12 lg:mb-16 text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">
               Secure Certification
             </h2>
             <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto">
-              Industry-leading certifications ensuring compliance and trust
+              ASRock Industrial is a pioneer in OT security with IEC 62443 and FIDO certifications.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
           {certifications.map((cert, index) => {
             const isFDO = cert.id === 'fido-device-onboard';
 
@@ -105,28 +99,33 @@ export function CertificationSection() {
               <FadeIn key={cert.id} delay={index * 150} className="h-full">
                 <div
                   className="
-                    h-full flex flex-col items-center text-center
+                    h-full flex flex-col 
+                    items-center text-center
                     bg-white rounded-2xl 
-                    pt-6 pb-5 px-4 sm:pt-8 sm:pb-6 sm:px-6 
+                    pt-6 pb-6 px-4 sm:pt-8 sm:pb-8 sm:px-6 
                     shadow-lg border border-slate-200 
                     transition-all duration-300
                     hover:-translate-y-2 hover:shadow-2xl
                   "
                 >
                   {/* 圖片容器 */}
-                  <div className="w-full h-52 sm:h-72 lg:h-80 relative mb-4 sm:mb-6 flex items-center justify-center flex-shrink-0">
+                  <div className="w-full h-52 sm:h-64 lg:h-72 relative mb-6 sm:mb-8 flex items-center justify-center flex-shrink-0">
                     <Image
                       src={cert.icon}
                       alt={cert.title}
                       fill
                       className={
-                        'object-contain drop-shadow-sm ' + (isFDO ? 'scale-75 sm:scale-100' : '')
+                        'object-contain object-center drop-shadow-sm ' + (isFDO ? 'scale-75 sm:scale-100' : '')
                       }
                     />
                   </div>
 
-                  {/* 標題容器 */}
-                  <div className="flex items-center justify-center mb-2 sm:mb-3 text-center min-h-[3.5rem] sm:min-h-[5rem] w-full">
+                  {/* 標題容器修正：
+                    1. items-start: 讓文字靠上對齊，確保第一行在同一水平線
+                    2. min-h-[4.5rem]: 確保容器高度足夠容納兩行，如果 FIDO 是三行則需更大
+                    3. pt-2: 稍微加點上方空間
+                  */}
+                  <div className="flex items-start justify-center mb-4 sm:mb-6 text-center min-h-[4.5rem] w-full px-2">
                     <h3
                       className={
                         (isFDO ? 'text-base ' : 'text-lg ') +
@@ -137,13 +136,16 @@ export function CertificationSection() {
                     </h3>
                   </div>
 
-                  {/* 內文 */}
+                  {/* 內文修正：
+                    1. textAlignLast: 'left': 強制最後一行靠左
+                    2. textAlign: 'justify': 左右對齊
+                  */}
                   <div
-                    className="flex-1 text-xs sm:text-sm text-slate-600 leading-relaxed w-full"
+                    className="flex-1 text-xs sm:text-sm text-slate-600 leading-relaxed w-full px-2 sm:px-0"
                     style={{
                       textAlign: 'justify',
                       textJustify: 'inter-word',
-                      textAlignLast: 'left' as any,
+                      textAlignLast: 'left' as any, // 關鍵修正
                     }}
                     dangerouslySetInnerHTML={{ __html: cert.description }}
                   />

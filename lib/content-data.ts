@@ -212,13 +212,13 @@ export const solutionTabs: SolutionTab[] = [
         label: 'Ai FDO',
         url: 'https://www.asrockind.com/Ai%20FDO',
         description: 'Ai FDO Secure, zero-touch device onboarding based on FIDO Device Onboard standards for automated deployment.',
-        image: '/AiFDO 1200x600.jpg'
+        image: '/aifdo_835x540.jpg'
       },
       {
         label: 'AiSMA',
         url: '#',
         description: 'AiSMA Redfish-based secure management architecture for remote monitoring and control of distributed systems.',
-        image: '/AiSMA.jpg'
+        image: '/aisma copy.jpg'
       },
       {
         label: 'AiSafeguard',

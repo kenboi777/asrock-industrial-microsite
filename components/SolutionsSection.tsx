@@ -14,6 +14,7 @@ export function SolutionsSection() {
   const tabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // 標題動畫偵測
     const titleObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -21,9 +22,10 @@ export function SolutionsSection() {
           if (titleRef.current) titleObserver.unobserve(titleRef.current);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
+    // Tabs 內容動畫偵測
     const tabsObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,7 +33,7 @@ export function SolutionsSection() {
           if (tabsRef.current) tabsObserver.unobserve(tabsRef.current);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 } // 稍微降低 threshold 確保滑動順暢
     );
 
     if (titleRef.current) titleObserver.observe(titleRef.current);
@@ -46,7 +48,7 @@ export function SolutionsSection() {
   return (
     <section 
       id="solutions" 
-      className="py-12 lg:py-28 bg-[hsl(var(--muted))]"
+      className="py-12 lg:py-16 bg-[hsl(var(--muted))]"
     >
       <style jsx global>{`
         @keyframes fadeInUp {
@@ -76,10 +78,10 @@ export function SolutionsSection() {
 
       <div className="container mx-auto px-4">
         
-        {/* --- 第一部分：標題區 --- */}
+        {/* --- 標題區 --- */}
         <div 
           ref={titleRef} 
-          className={`text-center mb-8 lg:mb-16 opacity-0 ${titleInView ? 'animate-title-delayed' : ''}`}
+          className={`text-center mb-8 lg:mb-10 opacity-0 ${titleInView ? 'animate-title-delayed' : ''}`}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Secure Solutions
@@ -89,7 +91,7 @@ export function SolutionsSection() {
           </p>
         </div>
 
-        {/* --- 第二部分：Tabs 區塊 --- */}
+        {/* --- Tabs 區塊 --- */}
         <div 
           ref={tabsRef}
           className={`w-full opacity-0 ${tabsInView ? 'animate-tabs-normal' : ''}`}
@@ -103,7 +105,7 @@ export function SolutionsSection() {
               rounded-2xl shadow-md
               "
             >
-              {solutionTabs.map((tab) => (
+              {solutionTabs && solutionTabs.map((tab) => (
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
@@ -123,14 +125,16 @@ export function SolutionsSection() {
               ))}
             </TabsList>
 
-            {solutionTabs.map((tab) => (
+            {solutionTabs && solutionTabs.map((tab) => (
               <TabsContent
                 key={tab.id}
                 value={tab.id}
-                className="mt-4 focus:outline-none overflow-hidden"
+                // 修正 1: 移除 overflow-hidden，這樣陰影才不會被切掉
+                // 同時加入 outline-none 避免點擊邊框
+                className="mt-4 focus:outline-none"
               >
-                <div key={tab.id} className="animate-tab-content space-y-8">
-                  <div className="space-y-4">
+                <div key={tab.id} className="animate-tab-content space-y-8 p-1"> {/* p-1 預留一點空間給 focus ring */}
+                  <div className="space-y-4 text-center sm:text-left">
                     <h3 className="text-2xl sm:text-3xl font-bold">
                       {tab.title}
                     </h3>
@@ -139,54 +143,73 @@ export function SolutionsSection() {
                     </p>
                   </div>
 
-                  <div className={`grid grid-cols-1 gap-6 ${tab.id === 'software-services' ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}>
+                  {/* Grid 容器：加入 p-2 或 p-4 避免貼邊導致陰影被切 (如果外層有的話) */}
+                  <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 ${tab.id === 'software-services' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}`}>
                     {tab.links.map((link) => {
                       const isSoftwareTab = tab.id === 'software-services';
                       
-                      // 1. 排版方向
-                      const flexDirection = isSoftwareTab ? 'flex-col' : 'flex-col md:flex-row';
-                      
-                      // 2. 寬度分配
-                      const imageWidthClass = isSoftwareTab ? 'w-full' : 'w-full md:w-[35%]';
-                      
-                      // 3. 縮放模式：Software 改用 cover 且寬度滿版，其他用 contain
+                      // 判斷特定產品
+                      const isExpandable = link.label === 'Expandable Edge AIoT Platform';
+
+                      // 修正 2: 縮放邏輯
+                      // Expandable: 預設 scale-125 (放大25%) -> Hover scale-145
+                      const scaleClass = isExpandable
+                        ? 'scale-[1.25] group-hover:scale-[1.45]'
+                        : 'scale-100 group-hover:scale-[1.15]';
+
+                      const flexDirection = 'flex-col';
                       const imageObjectFit = isSoftwareTab ? 'object-cover' : 'object-contain';
-                      
-                      // 4. 高度設定：Software 改用 h-auto 讓圖片依比例撐開，避免裁切；其他維持固定高度
-                      const imageHeightClass = isSoftwareTab ? 'h-auto aspect-video' : 'h-64 md:h-auto'; 
-                      
-                      // 5. 關鍵修正：內距設定
-                      // Software Tab 設為 p-0 (無內距) -> 達成滿版效果
-                      // 其他 Tab 設為 p-4 -> 保持留白美感
-                      const imagePadding = isSoftwareTab ? 'p-0' : 'p-4';
+                      const imagePadding = isSoftwareTab ? 'p-0' : 'p-6';
+                      // 給 Expandable 更多垂直空間避免放大後切頭切尾
+                      const imageHeightClass = isSoftwareTab ? 'h-auto aspect-video' : (isExpandable ? 'h-64' : 'h-56'); 
 
                       return (
                         <div
                           key={link.label}
-                          className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex ${flexDirection}`}
+                          // 修正 3: 陰影設定
+                          // 使用 shadow-[0_0_20px_...] 讓陰影均勻擴散到四周 (左、右、下)
+                          className={`
+                            bg-white rounded-2xl overflow-hidden 
+                            shadow-[0_0_20px_rgba(0,0,0,0.08)] 
+                            hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] 
+                            transition-all duration-300 
+                            flex ${flexDirection} h-full group
+                            border border-transparent hover:border-slate-100
+                            relative z-10
+                          `}
                         >
-                          {/* 圖片容器：套用動態的 padding 和 height */}
-                          <div className={`${imageWidthClass} ${imageHeightClass} relative overflow-hidden flex-shrink-0 flex items-center justify-center bg-white ${imagePadding}`}>
+                          {/* 圖片區域 */}
+                          <div className={`w-full ${imageHeightClass} relative overflow-visible flex-shrink-0 flex items-center justify-center bg-white ${imagePadding}`}>
+                            
+                            {/* 修正 4: 底部高斯模糊陰影 (懸浮感) */}
+                            {/* 僅在非 Software Tab 顯示，位置調整為 bottom-2 確保在圖片腳下 */}
+                            {!isSoftwareTab && (
+                              <div 
+                                className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[70%] h-4 bg-black/20 blur-xl rounded-[100%] transition-opacity duration-300 opacity-0 group-hover:opacity-50"
+                                aria-hidden="true"
+                              />
+                            )}
+
                             <img
                               src={link.image}
                               alt={link.label}
-                              className={`w-full h-full ${imageObjectFit}`}
+                              // 套用縮放
+                              className={`w-full h-full ${imageObjectFit} transition-transform duration-500 ease-out ${scaleClass} relative z-20`}
                             />
                           </div>
                           
-                          <div className="p-6 flex flex-col flex-grow">
-                            <h4 className="text-xl font-bold mb-3">
+                          {/* 內容區域 */}
+                          <div className="p-5 flex flex-col flex-grow items-center justify-between gap-4 z-30 bg-white">
+                            <h4 className="text-lg font-bold text-center leading-tight">
                               {link.label}
                             </h4>
-                            <p className="text-[hsl(var(--muted-foreground))] mb-4 flex-grow text-justify" style={{ textAlignLast: 'left' }}>
-                              {link.description}
-                            </p>
+                            
                             <Button
                               onClick={() => window.open(link.url, '_blank')}
-                              className="w-full bg-green-600 hover:bg-green-700 text-white group mt-auto"
+                              className="w-full bg-green-600 hover:bg-green-700 text-white group/btn mt-auto"
                             >
                               Learn More
-                              <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                              <ExternalLink className="ml-2 w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
                             </Button>
                           </div>
                         </div>

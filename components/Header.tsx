@@ -8,6 +8,7 @@ import { navItems } from '@/lib/content-data';
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   // 預設 activeSection 為 overview，確保一進來就亮
   const [activeSection, setActiveSection] = useState('overview');
 
@@ -18,7 +19,6 @@ export function Header() {
 
       // --- 機制修改 1: 強制置頂判定 ---
       // 如果捲動高度小於 100px (接近頂部)，直接鎖定 Overview 為作用中
-      // 這樣可以解決「一開始沒有滑動就不亮」或者「滑回頂部延遲」的問題
       if (currentScrollY < 100) {
         setActiveSection('overview');
         return; 
@@ -31,7 +31,7 @@ export function Header() {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // 只要區塊頂部進入視窗上方 1/3 (300px) 範圍內，就視為該區塊
+          // 使用 getBoundingClientRect 判斷：頂部進入 300px 內，且底部還沒離開 100px
           return rect.top <= 300 && rect.bottom >= 100;
         }
         return false;
@@ -42,7 +42,7 @@ export function Header() {
       }
     };
 
-    // 初始化時執行一次，確保重整後狀態正確
+    // 初始化時執行一次
     handleScroll();
 
     window.addEventListener('scroll', handleScroll);
@@ -57,7 +57,7 @@ export function Header() {
       return;
     }
 
-    // 點擊瞬間直接設定為 Active，提升反應速度
+    // 點擊瞬間直接設定為 Active
     const targetId = href.substring(1);
     setActiveSection(targetId);
 
@@ -109,7 +109,7 @@ export function Header() {
                     px-5 py-2 text-sm font-medium rounded-full transition-all duration-300
                     ${
                       activeSection === item.href.substring(1)
-                        ? 'text-white bg-[#2a3971] shadow-md scale-105' // Active: 企業深藍 + 放大
+                        ? 'text-white bg-[#2a3971] shadow-md scale-105'
                         : 'text-slate-600 hover:text-[#2a3971] hover:bg-white hover:shadow-lg hover:-translate-y-0.5'
                     }
                   `}
@@ -128,8 +128,6 @@ export function Header() {
                 className="
                   hidden sm:inline-flex 
                   text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5
-                  /* --- 顏色修改：上下漸層 (bg-gradient-to-b) --- */
-                  /* 從淺天空藍 (sky-400) 漸變到 寶藍色 (blue-600) */
                   bg-gradient-to-b from-sky-400 to-blue-600 
                   hover:from-sky-300 hover:to-blue-500
                 "
@@ -195,7 +193,6 @@ export function Header() {
               }
               className="
                 w-full py-6 text-lg text-white shadow-lg transition-all active:scale-95
-                /* 同步修改：上下漸層 */
                 bg-gradient-to-b from-sky-400 to-blue-600 
                 hover:from-sky-300 hover:to-blue-500
               "

@@ -10,7 +10,7 @@ const iconMap = {
   youtube: Youtube,
 };
 
-// --- FadeIn 動畫元件 (維持一致) ---
+// --- FadeIn 動畫元件 ---
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
@@ -50,19 +50,13 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 
 export function InquirySection() {
   return (
-    // 1. 基底色：使用深黑色(#020617)作為畫布，讓上面的藍色光暈更明顯
     <section id="inquiry" className="relative bg-[#020617] text-white overflow-hidden">
       
-      {/* 2. 互動背景層：企業藍光暈 (佔比 30%-40%)
-          - 顏色：改用 #2a3971 (企業藍)
-          - 範圍：opacity-90 (提高不透明度，讓藍色非常明顯)
-          - 漸層：從底部中心向上擴散，保留足夠的藍色區域
-      */}
+      {/* 背景光暈層 */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
           className="absolute inset-0 opacity-90"
           style={{
-            // 漸層邏輯：中心是較亮的企業藍 -> 向外擴散到純企業藍 -> 再過渡到透明
             backgroundImage: 'radial-gradient(circle at 50% 100%, #465ba3 0%, #2a3971 40%, transparent 85%)',
             backgroundAttachment: 'fixed',
           }}
@@ -86,7 +80,6 @@ export function InquirySection() {
               }
               className="
                 bg-white 
-                /* 修改：按鈕文字改為企業藍 #2a3971，呼應背景 */
                 text-[#2a3971]
                 hover:bg-blue-50 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]
                 transition-all duration-300
@@ -113,8 +106,12 @@ export function InquirySection() {
                   className="
                     flex items-center justify-center w-12 h-12 rounded-full 
                     bg-white/10 border border-white/10 backdrop-blur-sm
-                    /* Hover 時使用稍亮的藍色，增加層次 */
-                    hover:bg-[#3d52a0] hover:border-[#3d52a0] hover:text-white hover:-translate-y-1
+                    
+                    /* 修改處：Hover 反白效果 */
+                    /* 背景變白，邊框變白，文字變深色(#020617) */
+                    hover:bg-white hover:border-white hover:text-[#020617] 
+                    hover:-translate-y-1
+                    
                     transition-all duration-300 text-slate-200
                   "
                   aria-label={social.name}
