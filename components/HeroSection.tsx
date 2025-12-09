@@ -95,9 +95,18 @@ export function HeroSection() {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-slate-900">
                 Why Industrial Cybersecurity Matters More Than Ever
               </h1>
-              <p className="text-lg md:text-xl text-[hsl(var(--muted-foreground))] max-w-4xl mx-auto leading-relaxed text-justify md:text-center">
-                In today's connected industrial landscape, cybersecurity has become the foundation of trust. As automation, AI and IoT continue to reshape industries, every connected system introduces both innovation and potential risk.
-              </p>
+              <p 
+  className="
+    text-lg md:text-xl 
+    text-[hsl(var(--muted-foreground))] 
+    max-w-6xl mx-auto           /* 修改 1: 寬度加大至 6xl 以對齊標題 */
+    leading-relaxed 
+    text-justify                /* 修改 2: 左右對齊 */
+    [text-align-last:left]      /* 修改 3: 強制最後一行靠左 */
+  "
+>
+  In today’s connected industrial landscape, cybersecurity has become the foundation of trust. As automation, AI, and IoT continue to reshape industries, every connected system introduces both innovation and potential risk. Industrial cybersecurity safeguards operations against data breaches, service interruptions, and evolving cyber threats ensuring safety, reliability, and continuity across critical environments.
+</p>
             </div>
           </FadeIn>
         </div>
