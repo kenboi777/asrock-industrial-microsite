@@ -191,13 +191,6 @@ export function LifecycleSection() {
                       border-none outline-none
                       z-10
                       
-                      /* 圓角邏輯：
-                         - 手機版：一律全圓角
-                         - 桌機版(sm)：
-                           - 第一個且作用中：左圓 (rounded-l-2xl) 右直 (rounded-r-none)
-                           - 其他作用中：全直角 (形狀由 clip-path 控制)
-                           - 非作用中：全直角 (貼合容器)
-                      */
                       rounded-xl
                       ${isActive && isFirst ? 'sm:rounded-l-2xl sm:rounded-r-none' : 'sm:rounded-none'}
 
@@ -313,7 +306,6 @@ export function LifecycleSection() {
                               </div>
                             </div>
                           ) : (
-                            /* 修正：圖片滿版 (移除 p-4, 改 object-cover) */
                             <div className="aspect-video relative rounded-2xl overflow-hidden bg-white shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300 group">
                               <Image 
                                 src="/Secure_Device.png" 
@@ -336,19 +328,24 @@ export function LifecycleSection() {
                               { icon: '/icons/runtime-memory.svg', title: 'Runtime & Memory Protection', desc: 'Advanced encryption, access controls, and side-channel defenses to safeguard memory, code integrity, and sensitive workloads in real time. ' },
                               { icon: '/icons/cryptographic-acceleration.svg', title: 'Cryptographic Acceleration', desc: 'AES-NI and SHA Extensions accelerate encryption, strengthen randomness, and protect stored data with efficient, hardware-based cryptography.' }
                             ].map((item, idx) => {
-                              // Runtime icon 放大邏輯
                               const isRuntime = item.title.includes('Runtime');
                               return (
-                                <div key={idx} className="flex flex-row lg:flex-col items-start lg:items-center h-full group">
-                                  <div className="mr-4 lg:mr-0 flex-shrink-0 flex items-center justify-center w-16 lg:w-auto lg:h-[82px] lg:mb-4">
+                                /* 修改重點：
+                                   1. items-center: 在手機版 (flex-row) 確保圖示與右側內容垂直置中
+                                   2. lg:items-center: 在桌機版 (flex-col) 確保內容水平置中
+                                */
+                                <div key={idx} className="flex flex-row lg:flex-col items-center lg:items-center h-full group">
+                                  {/* 修改重點：手機版 icon 容器 w-12, 移除 pt-1 以確保完全置中 */}
+                                  <div className="mr-4 lg:mr-0 flex-shrink-0 flex items-center justify-center w-12 lg:w-auto lg:h-[82px] lg:mb-4">
                                     <Image 
                                       src={item.icon} 
                                       alt={item.title} 
                                       width={60} 
                                       height={60} 
                                       className={`
-                                        w-[60px] h-[60px] object-contain drop-shadow-md transition-transform duration-300
-                                        ${/* Runtime 預設放大 15%, Hover 放大 25% */
+                                        /* 圖片本體在手機版縮小為 w-12 (48px) */
+                                        w-12 h-12 lg:w-[60px] lg:h-[60px] object-contain drop-shadow-md transition-transform duration-300
+                                        ${
                                           isRuntime 
                                             ? 'scale-[1.15] group-hover:scale-[1.25]' 
                                             : 'group-hover:scale-110'
@@ -357,8 +354,8 @@ export function LifecycleSection() {
                                     />
                                   </div>
                                   <div className="flex flex-col flex-1 w-full">
-                                    {/* 修正：標題靠上對齊 (items-start) */}
-                                    <h4 className="text-sm md:text-lg font-bold text-slate-800 text-left lg:text-center min-h-[3.5rem] flex items-start lg:justify-center mb-2 leading-tight">
+                                    {/* 標題靠上對齊 */}
+                                    <h4 className="text-sm md:text-lg font-bold text-slate-800 text-left lg:text-center lg:min-h-[3.5rem] flex items-start lg:justify-center mb-2 leading-tight">
                                       {item.title}
                                     </h4>
                                     <p className="text-xs md:text-sm leading-relaxed text-slate-600 text-justify" style={{ textAlignLast: 'left' as any }}>

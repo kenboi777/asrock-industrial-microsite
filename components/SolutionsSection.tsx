@@ -14,7 +14,6 @@ export function SolutionsSection() {
   const tabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 標題動畫偵測
     const titleObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -25,7 +24,6 @@ export function SolutionsSection() {
       { threshold: 0.3 }
     );
 
-    // Tabs 內容動畫偵測
     const tabsObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -33,7 +31,7 @@ export function SolutionsSection() {
           if (tabsRef.current) tabsObserver.unobserve(tabsRef.current);
         }
       },
-      { threshold: 0.2 } // 稍微降低 threshold 確保滑動順暢
+      { threshold: 0.2 }
     );
 
     if (titleRef.current) titleObserver.observe(titleRef.current);
@@ -45,6 +43,8 @@ export function SolutionsSection() {
     };
   }, []);
 
+  const tabs = solutionTabs || [];
+
   return (
     <section 
       id="solutions" 
@@ -55,22 +55,18 @@ export function SolutionsSection() {
           0% { opacity: 0; transform: translateY(40px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        
         .animate-title-delayed {
           animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: 0.2s;
         }
-
         .animate-tabs-normal {
           animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
           animation-delay: 0.2s;
         }
-
         @keyframes slideInRight {
           from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-        
         .animate-tab-content {
           animation: slideInRight 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
@@ -105,7 +101,7 @@ export function SolutionsSection() {
               rounded-2xl shadow-md
               "
             >
-              {solutionTabs && solutionTabs.map((tab) => (
+              {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
@@ -125,15 +121,13 @@ export function SolutionsSection() {
               ))}
             </TabsList>
 
-            {solutionTabs && solutionTabs.map((tab) => (
+            {tabs.map((tab) => (
               <TabsContent
                 key={tab.id}
                 value={tab.id}
-                // 修正 1: 移除 overflow-hidden，這樣陰影才不會被切掉
-                // 同時加入 outline-none 避免點擊邊框
                 className="mt-4 focus:outline-none"
               >
-                <div key={tab.id} className="animate-tab-content space-y-8 p-1"> {/* p-1 預留一點空間給 focus ring */}
+                <div key={tab.id} className="animate-tab-content space-y-8 p-1">
                   <div className="space-y-4 text-center sm:text-left">
                     <h3 className="text-2xl sm:text-3xl font-bold">
                       {tab.title}
@@ -143,31 +137,36 @@ export function SolutionsSection() {
                     </p>
                   </div>
 
-                  {/* Grid 容器：加入 p-2 或 p-4 避免貼邊導致陰影被切 (如果外層有的話) */}
                   <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 ${tab.id === 'software-services' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}`}>
                     {tab.links.map((link) => {
                       const isSoftwareTab = tab.id === 'software-services';
                       
-                      // 判斷特定產品
                       const isExpandable = link.label === 'Expandable Edge AIoT Platform';
+                      const isCompact = link.label === 'Compact Edge AIoT Platform';
 
-                      // 修正 2: 縮放邏輯
-                      // Expandable: 預設 scale-125 (放大25%) -> Hover scale-145
-                      const scaleClass = isExpandable
-                        ? 'scale-[1.25] group-hover:scale-[1.45]'
-                        : 'scale-100 group-hover:scale-[1.15]';
+                      // --- 縮放邏輯設定 ---
+                      let scaleClass = 'scale-100 group-hover:scale-[1.15]'; 
+
+                      if (isExpandable) {
+                        // ★ 第一張圖：放大 15% (scale-1.15)
+                        scaleClass = 'scale-[1.15] group-hover:scale-[1.25]';
+                      } else if (isCompact) {
+                        // ★ 第二張圖：放大 15% (scale-1.15)
+                        scaleClass = 'scale-[1.15] group-hover:scale-[1.25]';
+                      } else if (isSoftwareTab) {
+                         scaleClass = 'scale-100 group-hover:scale-110';
+                      }
 
                       const flexDirection = 'flex-col';
                       const imageObjectFit = isSoftwareTab ? 'object-cover' : 'object-contain';
                       const imagePadding = isSoftwareTab ? 'p-0' : 'p-6';
-                      // 給 Expandable 更多垂直空間避免放大後切頭切尾
-                      const imageHeightClass = isSoftwareTab ? 'h-auto aspect-video' : (isExpandable ? 'h-64' : 'h-56'); 
+                      
+                      // 高度統一設定為 h-64，確保底部文字對齊
+                      const imageHeightClass = isSoftwareTab ? 'h-auto aspect-video' : 'h-64'; 
 
                       return (
                         <div
                           key={link.label}
-                          // 修正 3: 陰影設定
-                          // 使用 shadow-[0_0_20px_...] 讓陰影均勻擴散到四周 (左、右、下)
                           className={`
                             bg-white rounded-2xl overflow-hidden 
                             shadow-[0_0_20px_rgba(0,0,0,0.08)] 
@@ -181,8 +180,7 @@ export function SolutionsSection() {
                           {/* 圖片區域 */}
                           <div className={`w-full ${imageHeightClass} relative overflow-visible flex-shrink-0 flex items-center justify-center bg-white ${imagePadding}`}>
                             
-                            {/* 修正 4: 底部高斯模糊陰影 (懸浮感) */}
-                            {/* 僅在非 Software Tab 顯示，位置調整為 bottom-2 確保在圖片腳下 */}
+                            {/* 底部高斯模糊陰影 (懸浮感) - 僅硬體顯示 */}
                             {!isSoftwareTab && (
                               <div 
                                 className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[70%] h-4 bg-black/20 blur-xl rounded-[100%] transition-opacity duration-300 opacity-0 group-hover:opacity-50"
@@ -193,13 +191,12 @@ export function SolutionsSection() {
                             <img
                               src={link.image}
                               alt={link.label}
-                              // 套用縮放
                               className={`w-full h-full ${imageObjectFit} transition-transform duration-500 ease-out ${scaleClass} relative z-20`}
                             />
                           </div>
                           
-                          {/* 內容區域 */}
-                          <div className="p-5 flex flex-col flex-grow items-center justify-between gap-4 z-30 bg-white">
+                          {/* 內容區域 - 維持 justify-end 確保文字靠下對齊 */}
+                          <div className="p-5 flex flex-col flex-grow items-center justify-end gap-4 z-30 bg-white">
                             <h4 className="text-lg font-bold text-center leading-tight">
                               {link.label}
                             </h4>
