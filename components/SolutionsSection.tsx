@@ -80,7 +80,7 @@ export function SolutionsSection() {
           className={`text-center mb-8 lg:mb-10 opacity-0 ${titleInView ? 'animate-title-delayed' : ''}`}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Secure Solutions
+          Secure Edge AI Solutions
           </h2>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto">
             Comprehensive portfolio of secure industrial computing platforms
