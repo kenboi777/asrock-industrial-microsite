@@ -10,7 +10,10 @@ export default function SolutionsPage() {
       <main className="min-h-screen pt-16">
         <SolutionsHero />
         <SolutionsSection />
-        <InquirySection />
+        
+        {/* ★ 修改這裡：加上 id="inquiry" ★ */}
+        <InquirySection id="inquiry" />
+        
       </main>
     </>
   );

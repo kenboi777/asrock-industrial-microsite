@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { lifecycleTabs } from '@/lib/content-data';
 
-// --- FadeIn 動畫元件 ---
+// --- FadeIn 動畫元件 (保持不變) ---
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
@@ -43,7 +43,13 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
   );
 };
 
-export function LifecycleSection() {
+// 1. 定義 props 介面，加入 id
+interface LifecycleSectionProps {
+  id?: string;
+}
+
+// 2. 接收 id 屬性
+export function LifecycleSection({ id }: LifecycleSectionProps) {
   const tabOrder = ['secure-device', 'secure-deployment', 'secure-operation'];
   const [activeTab, setActiveTab] = useState('secure-device');
   const [direction, setDirection] = useState('right');
@@ -59,7 +65,11 @@ export function LifecycleSection() {
   const arrowDepth = '25px';
 
   return (
-    <section className="py-20 lg:py-28 bg-white overflow-hidden">
+    // 3. 將 id 綁定到最外層的 section
+    <section 
+      id={id} 
+      className="py-20 lg:py-28 bg-white overflow-hidden"
+    >
       <style jsx global>{`
         /* --- 動畫效果 --- */
         @keyframes slideInFromRight {
@@ -330,12 +340,7 @@ export function LifecycleSection() {
                             ].map((item, idx) => {
                               const isRuntime = item.title.includes('Runtime');
                               return (
-                                /* 修改重點：
-                                   1. items-center: 在手機版 (flex-row) 確保圖示與右側內容垂直置中
-                                   2. lg:items-center: 在桌機版 (flex-col) 確保內容水平置中
-                                */
                                 <div key={idx} className="flex flex-row lg:flex-col items-center lg:items-center h-full group">
-                                  {/* 修改重點：手機版 icon 容器 w-12, 移除 pt-1 以確保完全置中 */}
                                   <div className="mr-4 lg:mr-0 flex-shrink-0 flex items-center justify-center w-12 lg:w-auto lg:h-[82px] lg:mb-4">
                                     <Image 
                                       src={item.icon} 
@@ -343,7 +348,6 @@ export function LifecycleSection() {
                                       width={60} 
                                       height={60} 
                                       className={`
-                                        /* 圖片本體在手機版縮小為 w-12 (48px) */
                                         w-12 h-12 lg:w-[60px] lg:h-[60px] object-contain drop-shadow-md transition-transform duration-300
                                         ${
                                           isRuntime 
@@ -354,7 +358,6 @@ export function LifecycleSection() {
                                     />
                                   </div>
                                   <div className="flex flex-col flex-1 w-full">
-                                    {/* 標題靠上對齊 */}
                                     <h4 className="text-sm md:text-lg font-bold text-slate-800 text-left lg:text-center lg:min-h-[3.5rem] flex items-start lg:justify-center mb-2 leading-tight">
                                       {item.title}
                                     </h4>

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { whyChooseFeatures } from '@/lib/content-data';
 
-// --- 1. 定義 FadeIn 動畫元件 (與其他頁面保持一致) ---
+// --- 1. 定義 FadeIn 動畫元件 (保持不變) ---
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
@@ -17,7 +17,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
           if (domRef.current) observer.unobserve(domRef.current);
         }
       });
-    }, { threshold: 0.1 }); // 進入畫面 10% 觸發
+    }, { threshold: 0.1 });
 
     const currentRef = domRef.current;
     if (currentRef) observer.observe(currentRef);
@@ -48,13 +48,19 @@ const imageMap = {
   'globe': '/Local Commitment.png',
 };
 
-export function WhyChooseSection() {
+// 1. 新增 Props 介面，定義 id
+interface WhyChooseSectionProps {
+  id?: string;
+}
+
+// 2. 在這裡接收 id 參數
+export function WhyChooseSection({ id }: WhyChooseSectionProps) {
   return (
-    // 建議加上 section tag 與 padding 讓結構更完整
-    <section className="py-20 lg:py-28 bg-white">
+    // 3. 將 id 綁定到最外層的 section
+    <section id={id} className="py-20 lg:py-28 bg-white">
       <div className="section-container">
         
-        {/* 2. 標題區塊加入淡入動畫 */}
+        {/* 標題區塊 */}
         <FadeIn>
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
@@ -71,7 +77,6 @@ export function WhyChooseSection() {
             const imageSrc = imageMap[feature.icon as keyof typeof imageMap];
             
             return (
-              // 3. 卡片區塊加入淡入動畫，設定 delay 產生階梯式效果
               <FadeIn key={feature.id} delay={index * 150} className="h-full">
                 <div
                   className="

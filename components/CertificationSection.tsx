@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
-// --- FadeIn 動畫元件 (保持不變) ---
+// --- FadeIn 動畫元件 ---
 const FadeIn = ({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
@@ -41,7 +41,11 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
   );
 };
 
-export function CertificationSection() {
+interface CertificationSectionProps {
+  id?: string;
+}
+
+export function CertificationSection({ id }: CertificationSectionProps) {
   const certifications = [
     {
       id: 'iec-62443-4-2',
@@ -53,7 +57,8 @@ export function CertificationSection() {
     {
       id: 'iec-62443-4-1',
       icon: '/icons/IEC62443-4-2.png',
-      title: 'IEC 62443-4-2: Secure Product Standard',
+      // ★ 修改 1：在這裡加入 \n 強制換行
+      title: 'IEC 62443-4-2: Secure\nProduct Standard', 
       description:
         'This certification verifies that <strong>ASRock Industrial</strong>’s products meet the technical security requirements for <strong>industrial automation and control systems (IACS)</strong>, ensuring trusted resilient, and compliant device operation.',
     },
@@ -67,7 +72,10 @@ export function CertificationSection() {
   ];
 
   return (
-    <section className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
+    <section 
+      id={id} 
+      className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden"
+    >
       
       <div className="absolute inset-0 pointer-events-none">
         <div 
@@ -108,7 +116,6 @@ export function CertificationSection() {
                     hover:-translate-y-2 hover:shadow-2xl
                   "
                 >
-                  {/* 圖片容器 */}
                   <div className="w-full h-52 sm:h-64 lg:h-72 relative mb-6 sm:mb-8 flex items-center justify-center flex-shrink-0">
                     <Image
                       src={cert.icon}
@@ -120,32 +127,25 @@ export function CertificationSection() {
                     />
                   </div>
 
-                  {/* 標題容器修正：
-                    1. items-start: 讓文字靠上對齊，確保第一行在同一水平線
-                    2. min-h-[4.5rem]: 確保容器高度足夠容納兩行，如果 FIDO 是三行則需更大
-                    3. pt-2: 稍微加點上方空間
-                  */}
+                  {/* 標題容器 */}
                   <div className="flex items-start justify-center mb-4 sm:mb-6 text-center min-h-[4.5rem] w-full px-2">
                     <h3
                       className={
                         (isFDO ? 'text-base ' : 'text-lg ') +
-                        'sm:text-xl font-bold leading-snug text-slate-800'
+                        // ★ 修改 2：加入 'whitespace-pre-line' 讓 \n 生效
+                        'sm:text-xl font-bold leading-snug text-slate-800 whitespace-pre-line'
                       }
                     >
                       {cert.title}
                     </h3>
                   </div>
 
-                  {/* 內文修正：
-                    1. textAlignLast: 'left': 強制最後一行靠左
-                    2. textAlign: 'justify': 左右對齊
-                  */}
                   <div
                     className="flex-1 text-xs sm:text-sm text-slate-600 leading-relaxed w-full px-2 sm:px-0"
                     style={{
                       textAlign: 'justify',
                       textJustify: 'inter-word',
-                      textAlignLast: 'left' as any, // 關鍵修正
+                      textAlignLast: 'left' as any,
                     }}
                     dangerouslySetInnerHTML={{ __html: cert.description }}
                   />

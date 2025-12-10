@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface PageHeroProps {
+  id?: string;
   title?: string;
   subtitle?: string;
   backgroundImage?: string;
@@ -12,16 +13,16 @@ interface PageHeroProps {
 }
 
 export function PageHero({
+  // 修改這裡：給 id 一個預設值 'overview'
+  // 這樣如果外面沒傳 id 進來，它就會自動變成 'overview'
+  id = 'overview', 
   title,
   subtitle,
   backgroundImage,
   desktopImage,
   mobileImage
 }: PageHeroProps) {
-  // 判斷是否有傳入標題，如果有，代表這個頁面需要顯示「舊版的文字遮罩模式」
   const hasContent = !!title || !!subtitle;
-  
-  // 只有在有內容時才需要動畫狀態
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -31,8 +32,12 @@ export function PageHero({
   }, [hasContent]);
 
   return (
-    <section className="relative w-full overflow-hidden">
-      {/* 1. 背景圖片區域 (共用邏輯) */}
+    // 這裡會接收上面的值，變成 id="overview"
+    <section 
+      id={id} 
+      className="relative w-full overflow-hidden"
+    >
+      {/* 1. 背景圖片區域 */}
       {backgroundImage ? (
         <div
           className="w-full h-[400px] md:h-[500px] lg:h-[600px] bg-cover bg-center bg-no-repeat"
@@ -69,7 +74,7 @@ export function PageHero({
         </>
       )}
 
-      {/* 2. 條件渲染：只有當 title 或 subtitle 存在時，才把遮罩加回來 */}
+      {/* 2. 文字內容與遮罩 */}
       {hasContent && (
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-center justify-center">
           <div className="container mx-auto px-4 text-center">

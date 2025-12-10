@@ -48,9 +48,16 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
   );
 };
 
-export function InquirySection() {
+// 1. 定義介面
+interface InquirySectionProps {
+  id?: string;
+}
+
+// 2. 接收 id，如果不傳，預設就是 undefined (不會產生 id 屬性)
+export function InquirySection({ id }: InquirySectionProps) {
   return (
-    <section id="inquiry" className="relative bg-[#020617] text-white overflow-hidden">
+    // 3. 這裡的 id 屬性會由外部傳入。如果外層沒傳，這個 section 就沒有 id，避免重複。
+    <section id={id} className="relative bg-[#020617] text-white overflow-hidden">
       
       {/* 背景光暈層 */}
       <div className="absolute inset-0 pointer-events-none">

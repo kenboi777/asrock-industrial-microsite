@@ -12,7 +12,10 @@ export default function InsightsPage() {
         <section className="py-16">
           <InsightsSection />
         </section>
-        <InquirySection />
+        
+        {/* ★ 修改這裡：加上 id="inquiry" ★ */}
+        <InquirySection id="inquiry" />
+        
       </main>
     </>
   );

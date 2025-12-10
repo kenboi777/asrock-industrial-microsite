@@ -6,7 +6,13 @@ import { Button } from '@/components/ui/button';
 import { solutionTabs } from '@/lib/content-data';
 import { ExternalLink } from 'lucide-react';
 
-export function SolutionsSection() {
+// 1. 定義介面
+interface SolutionsSectionProps {
+  id?: string;
+}
+
+// 2. 接收 id 參數
+export function SolutionsSection({ id }: SolutionsSectionProps) {
   const [titleInView, setTitleInView] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
 
@@ -46,8 +52,10 @@ export function SolutionsSection() {
   const tabs = solutionTabs || [];
 
   return (
+    // 3. 將 id 綁定到 section (如果有傳入 id 則使用，否則預設為 "solutions" 或者是 undefined)
+    // 為了保險，這裡我設一個預設值，但你也可以用 id={id} 就好
     <section 
-      id="solutions" 
+      id={id || "solutions"} 
       className="py-12 lg:py-16 bg-[hsl(var(--muted))]"
     >
       <style jsx global>{`
@@ -80,7 +88,7 @@ export function SolutionsSection() {
           className={`text-center mb-8 lg:mb-10 opacity-0 ${titleInView ? 'animate-title-delayed' : ''}`}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-          Secure Edge AI Solutions
+            Secure Edge AI Solutions
           </h2>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto">
             Comprehensive portfolio of secure industrial computing platforms
@@ -132,7 +140,7 @@ export function SolutionsSection() {
                     <h3 className="text-2xl sm:text-3xl font-bold">
                       {tab.title}
                     </h3>
-                    <p className="text-lg text-[hsl(var(--muted-foreground))] leading-relaxed text-justify" style={{ textAlignLast: 'left' }}>
+                    <p className="text-lg text-[hsl(var(--muted-foreground))] leading-relaxed text-justify" style={{ textAlignLast: 'left' as any }}>
                       {tab.description}
                     </p>
                   </div>
@@ -148,20 +156,17 @@ export function SolutionsSection() {
                       let scaleClass = 'scale-100 group-hover:scale-[1.15]'; 
 
                       if (isExpandable) {
-                        // ★ 第一張圖：放大 15% (scale-1.15)
                         scaleClass = 'scale-[1.15] group-hover:scale-[1.25]';
                       } else if (isCompact) {
-                        // ★ 第二張圖：放大 15% (scale-1.15)
                         scaleClass = 'scale-[1.15] group-hover:scale-[1.25]';
                       } else if (isSoftwareTab) {
-                         scaleClass = 'scale-100 group-hover:scale-110';
+                          scaleClass = 'scale-100 group-hover:scale-110';
                       }
 
                       const flexDirection = 'flex-col';
                       const imageObjectFit = isSoftwareTab ? 'object-cover' : 'object-contain';
                       const imagePadding = isSoftwareTab ? 'p-0' : 'p-6';
                       
-                      // 高度統一設定為 h-64，確保底部文字對齊
                       const imageHeightClass = isSoftwareTab ? 'h-auto aspect-video' : 'h-64'; 
 
                       return (
@@ -195,7 +200,7 @@ export function SolutionsSection() {
                             />
                           </div>
                           
-                          {/* 內容區域 - 維持 justify-end 確保文字靠下對齊 */}
+                          {/* 內容區域 */}
                           <div className="p-5 flex flex-col flex-grow items-center justify-end gap-4 z-30 bg-white">
                             <h4 className="text-lg font-bold text-center leading-tight">
                               {link.label}

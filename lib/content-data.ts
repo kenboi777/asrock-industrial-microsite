@@ -324,7 +324,7 @@ export const faqItems: FAQItem[] = [
     id: 'what-is',
     question: 'What is Industrial Cybersecurity?',
     answer:
-      'Industrial cybersecurity is the backbone of digital resilience in modern industry, protecting connected systems, data, and operations that power manufacturing, energy, and smart infrastructure. It extends beyond IT defense to secure operational technology (OT) environments where uptime and safety are critical. For forward-looking leaders, cybersecurity is not just protection, but a strategic enabler of trust, compliance, and sustainable growth. It ensures that as industries embrace AI, automation, and connectivity, they can innovate with confidence—keeping every system secure, every process reliable, and every future advancement built on trust.',
+      'Industrial cybersecurity is the backbone of digital resilience in modern industry protecting connected systems, data, and operations that power manufacturing, energy, and smart infrastructure. It extends beyond IT defense to secure operational technology (OT) environments where uptime and safety are critical. For forward-looking leaders, cybersecurity is not just protection, but a strategic enabler of trust, compliance, and sustainable growth. It ensures that as industries embrace AI, automation, and connectivity, they can innovate with confidence, keeping every system secure, every process reliable, and every future advancement built on trust.',
   },
   {
     id: 'why-important',
@@ -338,7 +338,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'The international frameworks that guide industrial cybersecurity include:<br/><br/>' +
       '• IEC 62443 – A globally recognized standard developed by ISA and IEC for securing industrial automation and control systems (IACS) through lifecycle-based security design and certification.<br/>' +
-      '(Source: <a href="https://www.isa.org/isa62443" target="_blank" rel="noopener noreferrer">ISA/IEC 62443 Series of Standards</a>)<br/><br/>' +
+      '(Source: <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards?" target="_blank" rel="noopener noreferrer">ISA/IEC 62443 Series of Standards</a>)<br/><br/>' +
       '• NIST SP 800-82 – A U.S. National Institute of Standards and Technology guideline providing practical recommendations for protecting industrial control systems against cyber threats.<br/>' +
       '(Source: <a href="https://csrc.nist.gov/publications/detail/sp/800-82/rev-2/final" target="_blank" rel="noopener noreferrer">NIST SP 800-82 Guide to ICS/OT Security</a>)<br/><br/>' +
       '• ISO/IEC 27001 – An international standard for information security management systems (ISMS), ensuring consistent governance, risk assessment, and data protection practices across organizations.<br/>' +
@@ -361,7 +361,7 @@ export const faqItems: FAQItem[] = [
     question: 'Why hardware security matters?',
     answer:
       'In the OT domain, software protection alone cannot ensure complete security. Hardware-based cybersecurity establishes the root of trust, enabling secure boot, data integrity, and resistance against tampering or firmware attacks. When combined, hardware and software form a multi-layered defense architecture, ensuring resilience from the foundational layer to the application level.<br/>' +
-      '(Source: <a href="https://www.intel.com/content/www/us/en/business/enterprise-computers/resources/hardware-shield.html" target="_blank" rel="noopener noreferrer">Intel Hardware Shield</a>)',
+      '(Source: <a href="https://www.intel.com/content/www/us/en/architecture-and-technology/vpro/vpro-security/overview.html" target="_blank" rel="noopener noreferrer">Intel Hardware Shield</a>)',
   },
   {
     id: 'hardware-enhancement',
@@ -373,7 +373,7 @@ export const faqItems: FAQItem[] = [
     id: 'product-layout',
     question: "What's ASRock Industrial's cybersecurity product layout?",
     answer:
-      'ASRock Industrial’s cybersecurity offering is structured around:<br/><br/>' +
+      'ASRock Industrial’s cybersecurity offering is defined by the following:<br/><br/>' +
       '<strong>Secure Device</strong> – Multi-layered protection built on hardware trust anchors, including a secure processor, TPM, secure boot, memory protection, and cryptographic safeguards. These mechanisms establish a hardware-rooted chain of trust, ensuring system integrity and defense against tampering from power-on to runtime.<br/><br/>' +
       '<strong>Secure Software Solutions</strong> – Extending protection beyond hardware, ASRock Industrial integrates a suite of secure software technologies<br/>' +
       '• <strong>Ai FDO</strong> – Enables secure and zero-touch device onboarding based on FIDO standards, ensuring every system begins in a trusted state.<br/>' +
@@ -395,10 +395,17 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
+// lib/content-data.ts
+
 export const navItems = [
-  { label: 'Overview', href: '/' },
-  { label: 'Secure Solutions', href: '/solutions' },
+  // ★ 修改這裡：改成 '/#overview' (代表：回到根目錄，然後找 ID)
+  { label: 'Overview', href: '/#overview' }, 
+  
+  // 其他維持不變 (如果是跳轉頁面就維持 '/solutions')
+  { label: 'Secure Solutions', href: '/solutions' }, 
   { label: 'Insights & Resources', href: '/insights' },
   { label: 'Q&A', href: '/qa' },
-  { label: 'Inquiry', href: '#inquiry' },
+  
+  // Inquiry 因為是 footer，可以維持 '#inquiry' (或者為了保險改成 '/#inquiry' 也可以，但 '#inquiry' 在首頁也能運作)
+  { label: 'Inquiry', href: '#inquiry' }, 
 ];

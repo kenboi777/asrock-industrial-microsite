@@ -9,7 +9,13 @@ import {
 } from '@/components/ui/accordion';
 import { faqItems } from '@/lib/content-data';
 
-export function QASection() {
+// 1. 定義 props 介面
+interface QASectionProps {
+  id?: string;
+}
+
+// 2. 接收 id 參數
+export function QASection({ id }: QASectionProps) {
   const [visibleItems, setVisibleItems] = useState<string[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -37,26 +43,17 @@ export function QASection() {
     return () => observer.disconnect();
   }, []);
 
-  // 核心渲染邏輯：智慧判斷是否需要圓點
   const renderAnswerContent = (answerText: string) => {
-    // 先把文字依據 '•' 切割開來
     const parts = answerText.split('•');
-    // 檢查原始字串是不是以 '•' 開頭 (這決定了第一段文字是不是清單項)
     const startsWithBullet = answerText.trim().startsWith('•');
 
     return (
       <div className="space-y-4">
         {parts.map((part, index) => {
-          // 過濾掉切割後產生的空字串 (例如 "• Item 1" 切割後第一個會是空字串)
           if (!part.trim()) return null;
 
-          // 判斷這一行要不要加圓點樣式：
-          // 1. 如果 index > 0，代表它是被切割出來的後半段，一定原本就有 '•'，所以要加。
-          // 2. 如果 index === 0 (第一段)，只有在原始字串就是以 '•' 開頭時才加。
-          //    (這樣可以避免 "這是一段前言 • 這是第一點" 的 "前言" 被加上圓點)
           const shouldShowBullet = index > 0 || startsWithBullet;
 
-          // 處理 (Source: ...) 的樣式
           const processedText = part.replace(
             /\(Source:\s*(.*?)\)/g,
             (_match, inner) =>
@@ -73,10 +70,8 @@ export function QASection() {
               }`}
             >
               {shouldShowBullet && (
-                // 只有需要圓點時才渲染這個 span
                 <span className="mr-3 shrink-0 select-none">•</span>
               )}
-              {/* 內容區塊 */}
               <span dangerouslySetInnerHTML={{ __html: processedText }} />
             </div>
           );
@@ -87,7 +82,8 @@ export function QASection() {
 
   return (
     <section
-      id="qa"
+      // 3. 使用傳入的 id，如果沒傳則預設為 "qa"
+      id={id || "qa"}
       ref={sectionRef}
       className="py-20 lg:py-28 bg-[hsl(var(--muted))]"
     >
