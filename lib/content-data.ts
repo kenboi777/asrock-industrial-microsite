@@ -230,7 +230,6 @@ export const solutionTabs: SolutionTab[] = [
   },
 ];
 
-// 5. Insight Articles
 export const insightArticles: InsightArticle[] = [
   // 新增：Article 252 (2025-12-02)
   {
@@ -239,6 +238,7 @@ export const insightArticles: InsightArticle[] = [
     date: '2025-12-02',
     category: 'News',
     excerpt: 'ASRock Industrial made its mark at FIDO Taipei Seminar, presenting a keynote on Secure Device integration with FIDO Device Onboard (FDO) deployment technology, demonstrating how automated, trusted, and scalable onboarding is transforming industrial edge AI.',
+    // 注意：這張圖片是外部連結，如果連結失效會破圖，建議下載後改為本地路徑
     image: 'https://www.asrockind.com/image/catalog/asrock/news/%E6%96%B0%E8%81%9E%E5%9C%96%E7%89%87/ASRock%20Industrial%20Presents%20Certified%20Edge%20Security%20and%20FDO%20Deployment%20at%20FIDO%20Taipei%20Seminar%20-%20Copy%20-%20Copy.jpg',
     link: 'https://www.asrockind.com/en-gb/article/252',
   },
@@ -266,14 +266,15 @@ export const insightArticles: InsightArticle[] = [
     date: '2025-08-25',
     category: 'Partnership',
     excerpt: 'Joining forces with Barbara to deliver advanced, secure, and cost-efficient edge computing solutions, combining reliable industrial computing systems with secure edge AI platform software.',
-    image: 'Barbara.jpg',
+    image: '/Barbara.jpg',
     link: 'https://www.asrockind.com/en-gb/article/245',
   },
- {
+  {
     id: '226',
     title: 'ASRock Industrial Enhances Industrial Edge Computing with Ubuntu Pro-Enabled Robust Edge AIoT Platforms',
     category: 'Product News',
-    date: '2025-06-10', // 推估日期：晚於 Computex (5月) 的發布
+    date: '2025-06-10',
+    excerpt: 'ASRock Industrial announces new AIoT platforms featuring Ubuntu Pro for enhanced security compliance and long-term maintenance.',
     image: '/Ubuntu.jpg',
     link: 'https://www.asrockind.com/article/226',
   },
@@ -281,7 +282,8 @@ export const insightArticles: InsightArticle[] = [
     id: '224',
     title: 'ASRock Industrial Pioneers Ai FDO as the First Zero-Touch Secure Onboarding Solution for Edge AIoT and Automation',
     category: 'Product News',
-    date: '2025-05-20', // 推估日期：配合 COMPUTEX 2025 (5/20-5/23) 期間發布
+    date: '2025-05-20',
+    excerpt: 'Introducing the industry-first Zero-Touch Secure Onboarding solution with FIDO Device Onboard (FDO) integration for seamless automation.',
     image: '/aifdo.jpg',
     link: 'https://www.asrockind.com/article/224',
   },
@@ -289,15 +291,17 @@ export const insightArticles: InsightArticle[] = [
     id: '223',
     title: 'ASRock Industrial Showcases Secure Edge AI Applications at CYBERSEC 2025',
     category: 'Event News',
-    date: '2025-04-15', // CYBERSEC 2025 展期首日
-    image: 'CYBERSEC_2025.jpg',
+    date: '2025-04-15',
+    excerpt: 'Join us at CYBERSEC 2025 to explore our latest secure Edge AI applications and defensive strategies for the industrial sector.',
+    image: '/CYBERSEC_2025.jpg',
     link: 'https://www.asrockind.com/article/223',
   },
   {
     id: '219',
     title: 'ASRock Industrial’s iEP-5010G Achieves Prestigious IEC 62443-4-2 Certification, Leading the Market in Secure Industrial Edge Computing',
     category: 'Security News',
-    date: '2025-03-13', // 根據搜尋結果確認的日期
+    date: '2025-03-13',
+    excerpt: 'The iEP-5010G Series has officially achieved the IEC 62443-4-2 certification, setting a new benchmark for industrial cybersecurity.',
     image: '/IEC_62443-4-2.jpg',
     link: 'https://www.asrockind.com/article/219',
   },
@@ -305,7 +309,8 @@ export const insightArticles: InsightArticle[] = [
     id: 'fido-case-study',
     title: 'ASRock Industrial Sets New Standard in Secure IoT Deployment with FDO Device Onboard',
     category: 'Case Study',
-    date: '2024-12-13', // FIDO Alliance 官方發布日期
+    date: '2024-12-13',
+    excerpt: 'A comprehensive case study on how ASRock Industrial utilizes FDO to streamline secure device onboarding and reduce deployment risks.',
     image: '/fido-onboard.jpg',
     link: 'https://fidoalliance.org/content-asrock-industrial-sets-new-standard-in-secure-iot-deployment-with-fdo-device-onboard/',
   },
@@ -314,6 +319,7 @@ export const insightArticles: InsightArticle[] = [
     title: 'ASRock Industrial Achieves Historic FIDO Device Onboard Certification',
     category: 'Product News',
     date: '2024-02-22',
+    excerpt: 'Achieving the historic FIDO Device Onboard Certification ensures robust security standards for IoT device deployment.',
     image: '/fido-device.jpg',
     link: 'https://www.asrockind.com/article/202',
   },
@@ -322,7 +328,8 @@ export const insightArticles: InsightArticle[] = [
     title: 'ASRock Industrial Achieves IEC 62443-4-1 Certification, Enhancing Cybersecurity Standards in Robust Edge AIoT Platform',
     category: 'Product News',
     date: '2023-12-07',
-    image: 'IEC_62443-4-1.jpg',
+    excerpt: 'Securing the foundation of Edge AIoT with the prestigious IEC 62443-4-1 certification for secure product development lifecycles.',
+    image: '/IEC_62443-4-1.jpg',
     link: 'https://www.asrockind.com/article/197',
   },
 ];
