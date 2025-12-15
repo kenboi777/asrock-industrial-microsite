@@ -125,7 +125,7 @@ export const solutionTabs: SolutionTab[] = [
   {
     id: 'edge-aiot',
     title: 'Industrial Robust Edge AIoT Platform',
-    description: "ASRock Industrial's Industrial Robust Edge AIoT Platform delivers high-performance computing reliable connectivity, and intelligent manageability for mission-critical industrial environments. Designed to operate under extreme conditions, it combines ruggedized hardware with advanced AI and IoT capabilities to enable real-time data processing, predictive maintenance, and automation at the edge. Supporting diverse verticals such as smart manufacturing, energy, and transportation, the platform empowers industries to accelerate digital transformation securely and efficiently.",
+    description: "ASRock Industrial's Industrial Robust Edge AIoT Platform delivers high-performance computing, reliable connectivity, and intelligent manageability for mission-critical industrial environments. Designed to operate under extreme conditions, it combines ruggedized hardware with advanced AI and IoT capabilities to enable real-time data processing, predictive maintenance, and automation at the edge. Supporting diverse verticals such as smart manufacturing, energy, and transportation, the platform empowers industries to accelerate digital transformation securely and efficiently.",
     links: [
       {
         label: 'Expandable Edge AIoT Platform',
@@ -248,7 +248,7 @@ export const insightArticles: InsightArticle[] = [
     date: '2025-10-27',
     category: 'News',
     excerpt: 'Industrial cybersecurity is essential to the future of smart infrastructure. Global frameworks such as the EU Cyber Resilience Act (CRA), NIST, and NIS2 elevate security from an option to a baseline requirement.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/Secure_Edge_AI-1200x900.jpg',
+    image: '/Secure_Edge_AI.jpg',
     link: 'https://www.asrockind.com/en-gb/article/250',
   },
   {
@@ -257,7 +257,7 @@ export const insightArticles: InsightArticle[] = [
     date: '2025-09-02',
     category: 'Product Launch',
     excerpt: 'Announcing the launch of AiUAC (ASRock Industrial Universal Automation Control) solution, a scalable, IEC 61499 compliant control engine designed to accelerate the transition to open industrial automation.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/AIUAC-1200x900.jpg',
+    image: '/AIUAC.jpg',
     link: 'https://www.asrockind.com/en-gb/article/246',
   },
   {
@@ -266,55 +266,64 @@ export const insightArticles: InsightArticle[] = [
     date: '2025-08-25',
     category: 'Partnership',
     excerpt: 'Joining forces with Barbara to deliver advanced, secure, and cost-efficient edge computing solutions, combining reliable industrial computing systems with secure edge AI platform software.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/Barbara_1200x1000.jpg',
+    image: 'Barbara.jpg',
     link: 'https://www.asrockind.com/en-gb/article/245',
   },
-  {
-    id: '244',
-    title: 'ASRock Industrial Launches Ai InduAgent Powered by PEGAAi',
-    date: '2025-08-19',
-    category: 'Product Launch',
-    excerpt: 'Introducing Ai InduAgent, an on-premise AI solution integrating automated optical inspection (AOI) with local LLM agent technology to deliver real-time analysis and actionable insights on the factory floor.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/InduAgent-1200x900.jpg',
-    link: 'https://www.asrockind.com/en-gb/article/244',
-  },
-
-  // --- From Category 29 (Articles / Case Studies) ---
-  {
-    id: '249',
-    title: '[Case Study] Renowned Donut Chain Powers Digital Menu Boards with ASRock Industrial iBOX Series',
-    date: '2025-10-16',
-    category: 'Case Study',
-    excerpt: 'A renowned global donut chain upgraded its digital signage with ASRock Industrial’s iBOX-J6412 to achieve standardized deployment across both indoor and outdoor displays, ensuring consistent customer experiences.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/Renowned_Donut-1200x900.jpg',
-    link: 'https://www.asrockind.com/en-gb/article/249',
+ {
+    id: '226',
+    title: 'ASRock Industrial Enhances Industrial Edge Computing with Ubuntu Pro-Enabled Robust Edge AIoT Platforms',
+    category: 'Product News',
+    date: '2025-06-10', // 推估日期：晚於 Computex (5月) 的發布
+    image: '/Ubuntu.jpg',
+    link: 'https://www.asrockind.com/article/226',
   },
   {
-    id: '240',
-    title: '[Case Study] GR3N Pilots the World\'s First Modular Depolymerization Plants',
-    date: '2025-08-13',
-    category: 'Case Study',
-    excerpt: 'Sustainability-driven innovator GR3N implemented a modular, scalable, and vendor-neutral control system to support its microwave-assisted depolymerization process, enabling infinite PET recycling.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/GR3N_1200x1000.jpg',
-    link: 'https://www.asrockind.com/en-gb/article/240',
+    id: '224',
+    title: 'ASRock Industrial Pioneers Ai FDO as the First Zero-Touch Secure Onboarding Solution for Edge AIoT and Automation',
+    category: 'Product News',
+    date: '2025-05-20', // 推估日期：配合 COMPUTEX 2025 (5/20-5/23) 期間發布
+    image: '/aifdo.jpg',
+    link: 'https://www.asrockind.com/article/224',
   },
   {
-    id: '238',
-    title: '[Case Study] J&W Elevates Smart Logistics Center with ASRock Industrial’s iEP-5000G',
-    date: '2025-07-02',
-    category: 'Case Study',
-    excerpt: 'J&W partnered with ASRock Industrial to deploy an intelligent hybrid automation system integrating a human-cobot system with a modular conveyor loop and autonomous mobile robots (AMRs).',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/J_W_1200x1000.jpg?',
-    link: 'https://www.asrockind.com/en-gb/article/238',
+    id: '223',
+    title: 'ASRock Industrial Showcases Secure Edge AI Applications at CYBERSEC 2025',
+    category: 'Event News',
+    date: '2025-04-15', // CYBERSEC 2025 展期首日
+    image: 'CYBERSEC_2025.jpg',
+    link: 'https://www.asrockind.com/article/223',
   },
   {
-    id: '69',
-    title: '[Case Study] Transforming Semiconductor IC Substrate Inspection with AI',
-    date: '2025-06-27',
+    id: '219',
+    title: 'ASRock Industrial’s iEP-5010G Achieves Prestigious IEC 62443-4-2 Certification, Leading the Market in Secure Industrial Edge Computing',
+    category: 'Security News',
+    date: '2025-03-13', // 根據搜尋結果確認的日期
+    image: '/IEC_62443-4-2.jpg',
+    link: 'https://www.asrockind.com/article/219',
+  },
+  {
+    id: 'fido-case-study',
+    title: 'ASRock Industrial Sets New Standard in Secure IoT Deployment with FDO Device Onboard',
     category: 'Case Study',
-    excerpt: 'A global leader in semiconductor packaging deployed an advanced AI AOI system for second-stage inspection, integrating PEGATRON’s PEGAAi with ASRock Industrial’s iEPF-9030S platform.',
-    image: 'https://www.asrockind.com/image/catalog/asrock/page_banner/Insight_img/PEGAAI_1200x1000.jpg?',
-    link: 'https://www.asrockind.com/en-gb/case-study/69',
+    date: '2024-12-13', // FIDO Alliance 官方發布日期
+    image: '/fido-onboard.jpg',
+    link: 'https://fidoalliance.org/content-asrock-industrial-sets-new-standard-in-secure-iot-deployment-with-fdo-device-onboard/',
+  },
+  {
+    id: '202',
+    title: 'ASRock Industrial Achieves Historic FIDO Device Onboard Certification',
+    category: 'Product News',
+    date: '2024-02-22',
+    image: '/fido-device.jpg',
+    link: 'https://www.asrockind.com/article/202',
+  },
+  {
+    id: '197',
+    title: 'ASRock Industrial Achieves IEC 62443-4-1 Certification, Enhancing Cybersecurity Standards in Robust Edge AIoT Platform',
+    category: 'Product News',
+    date: '2023-12-07',
+    image: 'IEC_62443-4-1.jpg',
+    link: 'https://www.asrockind.com/article/197',
   },
 ];
 
@@ -405,7 +414,5 @@ export const navItems = [
   { label: 'Secure Solutions', href: '/solutions' }, 
   { label: 'Insights & Resources', href: '/insights' },
   { label: 'Q&A', href: '/qa' },
-  
-  // Inquiry 因為是 footer，可以維持 '#inquiry' (或者為了保險改成 '/#inquiry' 也可以，但 '#inquiry' 在首頁也能運作)
-  { label: 'Inquiry', href: '#inquiry' }, 
+
 ];

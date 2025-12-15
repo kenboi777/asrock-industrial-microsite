@@ -65,14 +65,14 @@ export function InsightsSection() {
   };
 
   return (
-    // 修改 1: 減少頂部 Padding (py-20 -> py-12)，讓整體內容往上移
-    <section id="insights" className="py-5 lg:py-16
-      bg-white">
+    // ★ 修改 1: 減少 Padding (py-12 -> py-8)，讓整體內容再往上移
+    <section id="insights" className="py-8 lg:py-12 bg-white">
       <div className="section-container px-4">
         
         {/* 標題區域 */}
-        <div className={`text-center mb-10 lg:mb-14 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+        {/* ★ 修改 2: 減少下方 margin (mb-10 -> mb-8)，拉近標題與搜尋框的距離 */}
+        <div className={`text-center mb-8 lg:mb-10 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
             Insights & Resources
           </h2>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto">
@@ -120,10 +120,9 @@ export function InsightsSection() {
               {/* 內容區塊 */}
               <div className="p-5 flex flex-col h-[180px]">
                 
-                {/* 修改 2: 標籤與日期同一行，且標籤變大 */}
+                {/* 標籤與日期同一行 */}
                 <div className="flex items-center justify-between mb-3">
                   <Badge 
-                    // 變更點：text-[10px] -> text-xs, px-2 -> px-2.5
                     className="bg-[#2f396e] hover:bg-[#2f396e]/90 text-white border-none shadow-sm text-xs px-2.5 py-1"
                   >
                     {article.category}

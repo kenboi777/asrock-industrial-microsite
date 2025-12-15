@@ -56,7 +56,7 @@ export function SolutionsSection({ id }: SolutionsSectionProps) {
     // 為了保險，這裡我設一個預設值，但你也可以用 id={id} 就好
     <section 
       id={id || "solutions"} 
-      className="py-12 lg:py-16 bg-[hsl(var(--muted))]"
+      className="py-16 lg:py-16 bg-[hsl(var(--muted))]"
     >
       <style jsx global>{`
         @keyframes fadeInUp {

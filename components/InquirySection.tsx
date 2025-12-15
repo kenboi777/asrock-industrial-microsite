@@ -77,7 +77,7 @@ export function InquirySection({ id }: InquirySectionProps) {
               Ready to Get Started?
             </h2>
             <p className="text-lg text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Contact us to learn more about our secure industrial computing solutions and how we can help protect your critical infrastructure.
+              Contact us to learn more about our secure industrial computing solutions and how we can help protect your	smart infrastructure.
             </p>
             
             <Button

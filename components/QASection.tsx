@@ -85,7 +85,7 @@ export function QASection({ id }: QASectionProps) {
       // 3. 使用傳入的 id，如果沒傳則預設為 "qa"
       id={id || "qa"}
       ref={sectionRef}
-      className="py-20 lg:py-28 bg-[hsl(var(--muted))]"
+      className="py-16 lg:py-28 bg-[hsl(var(--muted))]"
     >
       <div className="section-container">
         <div className="text-center mb-12 lg:mb-16">
