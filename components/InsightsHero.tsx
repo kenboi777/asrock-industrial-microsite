@@ -34,15 +34,15 @@ export function InsightsHero() {
         <div className="container mx-auto px-4 h-full">
           <div className="flex flex-col md:flex-row justify-end md:justify-end items-center h-full pb-4 md:pb-0">
             
+            {/* ★ 修改重點：將 lg:mr-24 改為 lg:mr-8 */}
             <div 
-              className={`w-full md:w-1/2 lg:w-1/2 lg:mr-24 flex flex-col gap-2 md:gap-4 transition-all duration-1000 ease-out 
+              className={`w-full md:w-1/2 lg:w-1/2 lg:mr-8 flex flex-col gap-2 md:gap-4 transition-all duration-1000 ease-out 
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
             >
               
               {/* Box 1 */}
               <div className="group border border-white/20 bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-5 shadow-lg md:min-h-[130px] flex items-center">
                 <div className="flex items-center gap-0 md:gap-4 w-full">
-                  {/* 修改重點：背景改為 bg-white/80 (微透明) */}
                   <div className="hidden md:block p-2 bg-white/80 rounded-lg text-[#0b1c38] shrink-0 shadow-sm backdrop-blur-sm">
                     <ShieldCheck size={24} />
                   </div>
@@ -54,8 +54,7 @@ export function InsightsHero() {
 
               {/* Box 2 */}
               <div className="group border border-white/20 bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-5 shadow-lg md:min-h-[130px] flex items-center">
-                 <div className="flex items-center gap-0 md:gap-4 w-full">
-                  {/* 修改重點：背景改為 bg-white/80 */}
+                  <div className="flex items-center gap-0 md:gap-4 w-full">
                   <div className="hidden md:block p-2 bg-white/80 rounded-lg text-[#0b1c38] shrink-0 shadow-sm backdrop-blur-sm">
                     <Server size={24} />
                   </div>
@@ -67,8 +66,7 @@ export function InsightsHero() {
 
               {/* Box 3 */}
               <div className="group border border-white/20 bg-white/10 backdrop-blur-md rounded-xl p-3 md:p-5 shadow-lg md:min-h-[130px] flex items-center">
-                 <div className="flex items-center gap-0 md:gap-4 w-full">
-                  {/* 修改重點：背景改為 bg-white/80 */}
+                  <div className="flex items-center gap-0 md:gap-4 w-full">
                   <div className="hidden md:block p-2 bg-white/80 rounded-lg text-[#0b1c38] shrink-0 shadow-sm backdrop-blur-sm">
                     <Link size={24} />
                   </div>
