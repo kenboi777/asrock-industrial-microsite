@@ -236,7 +236,7 @@ export const insightArticles: InsightArticle[] = [
     id: '252',
     title: 'ASRock Industrial Presents Certified Edge Security and FDO Deployment at FIDO Taipei Seminar',
     date: '2025-12-02',
-    category: 'News',
+    category: 'Security News',
     excerpt: 'ASRock Industrial made its mark at FIDO Taipei Seminar, presenting a keynote on Secure Device integration with FIDO Device Onboard (FDO) deployment technology, demonstrating how automated, trusted, and scalable onboarding is transforming industrial edge AI.',
     // 注意：這張圖片是外部連結，如果連結失效會破圖，建議下載後改為本地路徑
     image: 'https://www.asrockind.com/image/catalog/asrock/news/%E6%96%B0%E8%81%9E%E5%9C%96%E7%89%87/ASRock%20Industrial%20Presents%20Certified%20Edge%20Security%20and%20FDO%20Deployment%20at%20FIDO%20Taipei%20Seminar%20-%20Copy%20-%20Copy.jpg',
@@ -246,7 +246,7 @@ export const insightArticles: InsightArticle[] = [
     id: '250',
     title: 'ASRock Industrial Leads the Future of Secure Edge AI Platforms',
     date: '2025-10-27',
-    category: 'News',
+    category: 'Security News',
     excerpt: 'Industrial cybersecurity is essential to the future of smart infrastructure. Global frameworks such as the EU Cyber Resilience Act (CRA), NIST, and NIS2 elevate security from an option to a baseline requirement.',
     image: '/Secure_Edge_AI.jpg',
     link: 'https://www.asrockind.com/en-gb/article/250',
@@ -308,11 +308,20 @@ export const insightArticles: InsightArticle[] = [
   {
     id: '197',
     title: 'ASRock Industrial Achieves IEC 62443-4-1 Certification, Enhancing Cybersecurity Standards in Robust Edge AIoT Platform',
-    category: 'Product News',
+    category: 'Security News',
     date: '2023-12-07',
     excerpt: 'Securing the foundation of Edge AIoT with the prestigious IEC 62443-4-1 certification for secure product development lifecycles.',
     image: '/IEC_62443-4-1.jpg',
     link: 'https://www.asrockind.com/article/197',
+  },
+    {
+    id: '168',
+    title: 'Intel® and ASRock Industrial build FIDO Device Onboard (FDO)-enabled devices for automated, bare-metal system onboarding',
+    category: 'Solution Brief',
+    date: '2023-08-09',
+    excerpt: 'Intel® and ASRock Industrial build FIDO Device Onboard (FDO)-enabled devices for automated, bare-metal system onboarding',
+    image: '/intel-asri-fido.jpg',
+    link: 'https://www.asrockind.com/en-gb/article/168',
   },
 ];
 
